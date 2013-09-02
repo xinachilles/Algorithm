@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
+using System.Drawing;
 
 
 namespace ClassLibrary
@@ -310,7 +311,66 @@ namespace ClassLibrary
 
         #endregion
 
-      
+
+        #endregion
+
+        #region 9.7
+        // have issure about the two conditions
+        // 1. if (screen[x, y] == ocolor)
+        // 2.  if (screen[x, y] == ncolor) 
+
+        
+
+        //Implement the "paint fill" function that one might see on many image editing
+        //programs. That is, given a screen (represented by a two-dimensional array of colors),
+        //a point, and a new color, fill in the surrounding area until the color changes from the
+        //original color
+
+        private bool PaintColor(Color[,] screen, int x, int y, Color ocolor, Color ncolor)
+        {
+            if (
+                  (x >= 0 && x >= screen.GetLength(0))
+                    ||
+                  (y > 0 && y >= screen.GetLength(1))
+                )
+            {
+                return false;
+            }
+
+            if (screen[x, y] == ocolor)
+            {
+
+                screen[x, y] = ncolor;
+                // left 
+                PaintColor(screen, x - 1, y, ocolor, ncolor);
+                //right
+                PaintColor(screen, x + 1, y, ocolor, ncolor);
+                //upper
+                PaintColor(screen, x, y - 1, ocolor, ncolor);
+                //down
+                PaintColor(screen, x, y + 1, ocolor, ncolor);
+
+            }
+
+            return true;
+        }
+
+
+        public bool PaintColor(Color[,] screen, int x, int y, Color ncolor)
+        {
+            if (screen[x, y] == ncolor)
+            {
+                return false;
+            }
+            else
+            {
+                return PaintColor(screen, x, y, ncolor);
+            }
+
+        }
+
+
+
         #endregion
     }
 }
