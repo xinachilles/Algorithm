@@ -178,5 +178,19 @@ namespace CosoleApplication1_Test
             Assert.AreEqual(expected, actual);
             Assert.Inconclusive("Verify the correctness of this test method.");
         }
+
+        /// <summary>
+        ///A test for makeChange
+        ///</summary>
+        [TestMethod()]
+        public void makeChangeTest()
+        {
+            Recursion target = new Recursion(); // TODO: Initialize to an appropriate value
+            int n = 100; // TODO: Initialize to an appropriate value
+            int denom = 25; // TODO: Initialize to an appropriate value
+            int actual; 
+            actual = target.makeChange(n, denom);
+            Console.WriteLine(actual.ToString());
+        }
     }
 }
