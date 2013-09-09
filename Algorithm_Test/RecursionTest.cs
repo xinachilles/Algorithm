@@ -192,5 +192,20 @@ namespace CosoleApplication1_Test
             actual = target.makeChange(n, denom);
             Console.WriteLine(actual.ToString());
         }
+
+        /// <summary>
+        ///A test for PlaceQueens
+        ///</summary>
+        [TestMethod()]
+        public void PlaceQueensTest()
+        {
+            Recursion target = new Recursion(); // TODO: Initialize to an appropriate value
+            int grid_size = 8; // TODO: Initialize to an appropriate value
+            int row = 0; // TODO: Initialize to an appropriate value
+            int[] columns = new int[grid_size]; // TODO: Initialize to an appropriate value
+            ArrayList results = new ArrayList(); // TODO: Initialize to an appropriate value
+            bool resutl = target.PlaceQueens(grid_size, row, columns,ref results);
+           
+        }
     }
 }

@@ -420,25 +420,28 @@ namespace ClassLibrary
         //"diagonal" means all diagonals, not just the two that bisect the board.
 
 
-        int GRID_SIZE = 8;
+      
 
-        public void placeQueens(int row, int[] columns, ArrayList results)
+        public bool PlaceQueens(int grid_size, int row, int[] columns,ref ArrayList results)
         {
-            if (row == GRID_SIZE)
-            { // Found valid placement
-                results.Add(columns.Clone());
-            }
-            else
+            if (row == grid_size)
             {
-                for (int col = 0; col < GRID_SIZE; col++)
+                results.Add(columns.Clone());  
+            }
+            else 
+            { // Found valid placement
+               
+                for (int col = 0; col < grid_size; col++)
                 {
                     if (checkValid(columns, row, col))
-                    {
+                    { 
                         columns[row] = col; // Place queen
-                        placeQueens(row + 1, columns, results);
+                        PlaceQueens(grid_size,row + 1,columns,ref results);
                     }
                 }
             }
+
+            return false; 
         }
 
         /* Check if (rowl, columnl) is a valid spot for a queen by checking
