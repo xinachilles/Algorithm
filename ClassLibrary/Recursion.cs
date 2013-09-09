@@ -422,7 +422,7 @@ namespace ClassLibrary
 
       
 
-        public bool PlaceQueens(int grid_size, int row, int[] columns,ref ArrayList results)
+        public void PlaceQueens(int grid_size, int row, int[] columns,ref ArrayList results)
         {
             if (row == grid_size)
             {
@@ -441,7 +441,7 @@ namespace ClassLibrary
                 }
             }
 
-            return false; 
+            
         }
 
         /* Check if (rowl, columnl) is a valid spot for a queen by checking
