@@ -204,8 +204,29 @@ namespace CosoleApplication1_Test
             int row = 0; // TODO: Initialize to an appropriate value
             int[] columns = new int[grid_size]; // TODO: Initialize to an appropriate value
             ArrayList results = new ArrayList(); // TODO: Initialize to an appropriate value
-            bool resutl = target.PlaceQueens(grid_size, row, columns,ref results);
+            target.PlaceQueens(grid_size, row, columns,ref results);
            
+        }
+
+        /// <summary>
+        ///A test for GetIncreasingSequence
+        ///</summary>
+        [TestMethod()]
+        public void GetIncreasingSequenceTest()
+        {
+            Recursion target = new Recursion(); // TODO: Initialize to an appropriate value
+            List<Recursion.HtWt> items = new List<Recursion.HtWt>(); // TODO: Initialize to an appropriate value
+            items.Add(new Recursion.HtWt(1,2));
+            items.Add(new Recursion.HtWt(2, 3));
+            items.Add(new Recursion.HtWt(1, 4));
+            items.Add(new Recursion.HtWt(5,7));
+            items.Add(new Recursion.HtWt(3, 9))
+                ;
+            List<Recursion.HtWt> expected = null; // TODO: Initialize to an appropriate value
+            List<Recursion.HtWt> actual;
+            actual = target.GetIncreasingSequence(items);
+            Assert.AreEqual(expected, actual);
+          
         }
     }
 }

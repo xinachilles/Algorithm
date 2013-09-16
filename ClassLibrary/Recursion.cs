@@ -420,28 +420,28 @@ namespace ClassLibrary
         //"diagonal" means all diagonals, not just the two that bisect the board.
 
 
-      
 
-        public void PlaceQueens(int grid_size, int row, int[] columns,ref ArrayList results)
+
+        public void PlaceQueens(int grid_size, int row, int[] columns, ref ArrayList results)
         {
             if (row == grid_size)
             {
-                results.Add(columns.Clone());  
+                results.Add(columns.Clone());
             }
-            else 
+            else
             { // Found valid placement
-               
+
                 for (int col = 0; col < grid_size; col++)
                 {
                     if (checkValid(columns, row, col))
-                    { 
+                    {
                         columns[row] = col; // Place queen
-                        PlaceQueens(grid_size,row + 1,columns,ref results);
+                        PlaceQueens(grid_size, row + 1, columns, ref results);
                     }
                 }
             }
 
-            
+
         }
 
         /* Check if (rowl, columnl) is a valid spot for a queen by checking
@@ -460,7 +460,7 @@ namespace ClassLibrary
                 if (column1 == column2)
                 {
                     return false;
-                }  
+                }
 
                 /* Check diagonals: if the distance between the columns equals the distance between the rows, then they're in the
                 same diagonal. */
@@ -479,6 +479,121 @@ namespace ClassLibrary
 
         #endregion
 
+
+        #region 11.7
+        // A circus is designing a tower routine consisting of people standing atop one another's
+        //shoulders. For practical and aesthetic reasons, each person must be both shorter
+        //and lighter than the person below him or her. Given the heights and weights of
+        //each person in the circus, write a method to compute the largest possible number
+        //of people in such a tower.
+
+
+        public List<HtWt> GetIncreasingSequence(List<HtWt> items)
+        {
+            items.Sort();
+            return longestIncreasingSubsequence(items);
+        } // end getIncrease
+
+        private void longestIncreasingSubsequence(List<HtWt> array,
+         List<HtWt>[] solutions, int current_index)
+        {
+            if (current_index >= array.Capacity || current_index < 0) return;
+            HtWt current_element = (HtWt)array[current_index];
+
+            /* Find longest sequence we can append current_element to */
+            List<HtWt> best_sequence = null;
+            for (int i = 0; i < current_index; i++)
+            {
+                if (((HtWt)array[i]).isBefore(current_element))
+                {
+                    best_sequence = seqWithMaxLength(best_sequence, solutions[i]);
+                }
+            }
+
+            /* Append current_element */
+            List<HtWt> new_solution = new List<HtWt>();
+            if (best_sequence != null)
+            {
+                new_solution.AddRange(best_sequence);
+            }
+            new_solution.Add(current_element);
+
+            /* Add to list and recurse */
+            solutions[current_index] = new_solution;
+            longestIncreasingSubsequence(array, solutions, current_index + 1);
+
+
+
+
+        } // end longestIncrease
+
+
+        private List<HtWt> longestIncreasingSubsequence( List<HtWt> array)
+        {
+            List<HtWt> [] solutions = new List<HtWt>[array.Capacity];
+            longestIncreasingSubsequence(array, solutions, 0);
+
+            List<HtWt> best_sequence = null;
+            for (int i = 0; i < array.Capacity; i++)
+            {
+                best_sequence = seqWithMaxLength(best_sequence, solutions[i]);
+            }
+
+            return best_sequence;
+        }
+
+
+        /* Returns longer sequence */
+        private List<HtWt> seqWithMaxLength(List<HtWt> seql, List<HtWt> seq2)
+        {
+            if (seql == null) return seq2;
+            if (seq2 == null) return seql;
+            return seql.Capacity > seq2.Capacity ? seql : seq2;
+        }
+
+        public class HtWt : IComparable
+        {
+            /* declarations, etc */
+            public  int Ht;
+            public  int Wt;
+
+            /* used for sort method */
+            public int CompareTo(Object s)
+            {
+                HtWt second = (HtWt)s;
+                if (this.Ht != second.Ht)
+                {
+                    return ((int)this.Ht).CompareTo(second.Ht);
+                }
+                else
+                {
+                    return ((int)this.Wt).CompareTo(second.Wt);
+                }
+            } // end compareTo
+
+            public bool isBefore(HtWt other)
+            {
+                if (this.Ht < other.Ht && this.Wt < other.Wt) return true;
+                else return false;
+            }
+
+            public HtWt(int h, int w)
+            {
+                Ht = h;
+                Wt = w;
+
+            }
+
+
+        } // end class
+
+        /* Returns true if "this" should be lined up before "other."
+        67 * Note that it's possible that this.isBefore(other) and
+        68 * other.isBefore(this) are both false. This is different from
+        69 * the compareTo method, where if a < b then b > a. */
+
+
+        #endregion
     }
 }
 
