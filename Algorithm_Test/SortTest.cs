@@ -15,7 +15,7 @@ namespace CosoleApplication1_Test
     {
 
 
-        private TestContext testContextInstance;
+        private TestContext TestContextInstance;
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -25,11 +25,11 @@ namespace CosoleApplication1_Test
         {
             get
             {
-                return testContextInstance;
+                return TestContextInstance;
             }
             set
             {
-                testContextInstance = value;
+                TestContextInstance = value;
             }
         }
 

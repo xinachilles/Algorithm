@@ -85,7 +85,7 @@ namespace CosoleApplication1_Test
         ///</summary>
         [TestMethod()]
         [DeploymentItem("ClassLibrary.dll")]
-        public void revStrTest()
+        public void RevStrTest()
         {
             string s = "abcdefg"; // TODO: Initialize to an appropriate value
             MyString_Accessor target = new MyString_Accessor(s); // TODO: Initialize to an appropriate value

@@ -487,6 +487,12 @@ namespace ClassLibrary
         //each person in the circus, write a method to compute the largest possible number
         //of people in such a tower.
 
+        /*
+         1. sort the array, (compared the height first, then compared the wid
+         2. find the logest increst subsequence for each item 
+             2.1 if the there exist (isbeofre() item from 0 - (i-1) ), the find the LIS from( 0- (i-1)) 
+         3. find the logest increst subsequence for the whole array
+         */
 
         public List<HtWt> GetIncreasingSequence(List<HtWt> items)
         {
@@ -495,9 +501,9 @@ namespace ClassLibrary
         } // end getIncrease
 
         private void longestIncreasingSubsequence(List<HtWt> array,
-         List<HtWt>[] solutions, int current_index)
+        ref List<HtWt>[] solutions, int current_index)
         {
-            if (current_index >= array.Capacity || current_index < 0) return;
+            if (current_index >= array.Count || current_index < 0) return;
             HtWt current_element = (HtWt)array[current_index];
 
             /* Find longest sequence we can append current_element to */
@@ -520,7 +526,7 @@ namespace ClassLibrary
 
             /* Add to list and recurse */
             solutions[current_index] = new_solution;
-            longestIncreasingSubsequence(array, solutions, current_index + 1);
+            longestIncreasingSubsequence(array, ref solutions, current_index + 1);
 
 
 
@@ -528,13 +534,13 @@ namespace ClassLibrary
         } // end longestIncrease
 
 
-        private List<HtWt> longestIncreasingSubsequence( List<HtWt> array)
+        private List<HtWt> longestIncreasingSubsequence(List<HtWt> array)
         {
-            List<HtWt> [] solutions = new List<HtWt>[array.Capacity];
-            longestIncreasingSubsequence(array, solutions, 0);
+            List<HtWt>[] solutions = new List<HtWt>[array.Count];
+            longestIncreasingSubsequence(array, ref solutions, 0);
 
             List<HtWt> best_sequence = null;
-            for (int i = 0; i < array.Capacity; i++)
+            for (int i = 0; i < array.Count; i++)
             {
                 best_sequence = seqWithMaxLength(best_sequence, solutions[i]);
             }
@@ -548,14 +554,14 @@ namespace ClassLibrary
         {
             if (seql == null) return seq2;
             if (seq2 == null) return seql;
-            return seql.Capacity > seq2.Capacity ? seql : seq2;
+            return seql.Count > seq2.Count ? seql : seq2;
         }
 
         public class HtWt : IComparable
         {
             /* declarations, etc */
-            public  int Ht;
-            public  int Wt;
+            public int Ht;
+            public int Wt;
 
             /* used for sort method */
             public int CompareTo(Object s)
@@ -570,6 +576,11 @@ namespace ClassLibrary
                     return ((int)this.Wt).CompareTo(second.Wt);
                 }
             } // end compareTo
+
+            /* Returns true if "this" should be lined up before "other."
+               Note that it's possible that this.isBefore(other) and
+               other.isBefore(this) are both false. This is different from
+               the compareTo method, where if a < b then b > a. */
 
             public bool isBefore(HtWt other)
             {
@@ -587,12 +598,79 @@ namespace ClassLibrary
 
         } // end class
 
-        /* Returns true if "this" should be lined up before "other."
-        67 * Note that it's possible that this.isBefore(other) and
-        68 * other.isBefore(this) are both false. This is different from
-        69 * the compareTo method, where if a < b then b > a. */
 
 
+
+        #endregion
+
+        #region #9.11
+        /*    9.11 Given a boolean expression consisting of the symbols 0,1, &, /, and A, and a desired
+    boolean result value result, implement a function to count the number of ways of
+    parenthesizing the expression such that it evaluates to resuL t.
+    */
+
+
+        public int f(String exp, bool result, int s, int e)
+        {
+            if (s == e)
+            {
+                if (exp[s] == '!' && result)
+                {
+                    return 1;
+                }
+                else if (exp[s] == '0' && !result)
+                {
+                    return 1;
+                }
+                return 0;
+            }
+            int c = 0;
+            if (result)
+            {
+                for (int i = s + 1; i <= e; i += 2)
+                {
+                    char op = exp[i];
+                    if (op == '&')
+                    {
+                        c += f(exp, true, s, i - 1) * f(exp, true, i + 1, e);
+                    }
+                    else if (op == '|')
+                    {
+                        c += f(exp, true, s, i - 1) * f(exp, false, i + 1, e);
+                        c += f(exp, false, s, i - 1) * f(exp, true, i + 1, e);
+                        c += f(exp, true, s, i - 1) * f(exp, true, i + 1, e);
+                    }
+                    else if (op == 'A')
+                    {
+                        c += f(exp, true, s, i - 1) * f(exp, false, i + 1, e);
+                        c += f(exp, false, s, i - 1) * f(exp, true, i + 1, e);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = s + 1; i <= e; i += 2)
+                {
+                    char op = exp[i];
+                    if (op == '&')
+                    {
+                        c += f(exp, false, s, i - 1) * f(exp, true, i + 1, e);
+                        c += f(exp, true, s, i - 1) * f(exp, false, i + 1, e);
+                        c += f(exp, false, s, i - 1) * f(exp, false, i + l, e);
+                    }
+                    else if (op == '|')
+                    {
+                        c += f(exp, false, s, i - 1) * f(exp, false, i + l, e);
+                    }
+                    else if (op == '^')
+                    {
+                        c += f(exp, true, s, i - 1) * f(exp, true, i + 1, e);
+                        c += f(exp, false, s, i - 1) * f(exp, false, i + l, e);
+                    }
+                }
+            }
+            return c;
+        }
         #endregion
     }
 }

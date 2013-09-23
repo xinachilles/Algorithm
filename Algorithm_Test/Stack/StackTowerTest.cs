@@ -68,7 +68,7 @@ namespace CosoleApplication1_Test
         ///A test for moveDisks
         ///</summary>
         [TestMethod()]
-        public void moveDisksTest()
+        public void MoveDisksTest()
         {
             int n = 3;
             StackTower[] towers = new StackTower[n];

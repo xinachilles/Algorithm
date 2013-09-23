@@ -69,7 +69,7 @@ namespace CosoleApplication1_Test
         ///A test for testD
         ///</summary>
         [TestMethod()]
-        public void testDTest()
+        public void TestDTest()
         {
             DerivedClassTest target = new DerivedClassTest(); // TODO: Initialize to an appropriate value
             target.testD();

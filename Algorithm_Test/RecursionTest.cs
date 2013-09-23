@@ -17,7 +17,7 @@ namespace CosoleApplication1_Test
     {
 
 
-        private TestContext testContextInstance;
+        private TestContext TestContextInstance;
 
         /// <summary>
         ///Gets or sets the test context which provides
@@ -27,11 +27,11 @@ namespace CosoleApplication1_Test
         {
             get
             {
-                return testContextInstance;
+                return TestContextInstance;
             }
             set
             {
-                testContextInstance = value;
+                TestContextInstance = value;
             }
         }
 
@@ -108,7 +108,7 @@ namespace CosoleApplication1_Test
         ///A test for getPath
         ///</summary>
         [TestMethod()]
-        public void getPathTest()
+        public void GetPathTest()
         {
             Recursion target = new Recursion(); // TODO: Initialize to an appropriate value
             int x = 10; // TODO: Initialize to an appropriate value
@@ -143,7 +143,7 @@ namespace CosoleApplication1_Test
         ///A test for generateParens
         ///</summary>
         [TestMethod()]
-        public void generateParensTest()
+        public void GenerateParensTest()
         {
             Recursion target = new Recursion(); // TODO: Initialize to an appropriate value
 
@@ -161,7 +161,7 @@ namespace CosoleApplication1_Test
         ///</summary>
         [TestMethod()]
         [DeploymentItem("ClassLibrary.dll")]
-        public void getSubsets2Test()
+        public void GetSubsets2Test()
         {
             Recursion_Accessor target = new Recursion_Accessor(); // TODO: Initialize to an appropriate value
             int[] test_array = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -183,7 +183,7 @@ namespace CosoleApplication1_Test
         ///A test for makeChange
         ///</summary>
         [TestMethod()]
-        public void makeChangeTest()
+        public void MakeChangeTest()
         {
             Recursion target = new Recursion(); // TODO: Initialize to an appropriate value
             int n = 100; // TODO: Initialize to an appropriate value
@@ -225,7 +225,7 @@ namespace CosoleApplication1_Test
             List<Recursion.HtWt> expected = null; // TODO: Initialize to an appropriate value
             List<Recursion.HtWt> actual;
             actual = target.GetIncreasingSequence(items);
-            Assert.AreEqual(expected, actual);
+           
           
         }
     }

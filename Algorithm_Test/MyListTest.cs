@@ -193,7 +193,7 @@ namespace CosoleApplication1_Test
         ///A test for isPalindromeWithRecurse
         ///</summary>
         [TestMethod()]
-        public void isPalindromeWithRecurseTest()
+        public void IsPalindromeWithRecurseTest()
         {
             int[] n = {0,1, 2, 3, 2, 1, 1}; // TODO: Initialize to an appropriate value
             MyList target = new MyList(n); // TODO: Initialize to an appropriate value

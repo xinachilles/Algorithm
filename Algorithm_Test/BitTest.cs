@@ -68,7 +68,7 @@ namespace CosoleApplication1_Test
         ///A test for printBinary
         ///</summary>
         [TestMethod()]
-        public void printBinaryTest()
+        public void PrintBinaryTest()
         {
             Bit target = new Bit(); // TODO: Initialize to an appropriate value
             double num = 0.101; // TODO: Initialize to an appropriate value

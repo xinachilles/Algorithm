@@ -110,7 +110,7 @@ namespace CosoleApplication1_Test
         ///A test for containsTree
         ///</summary>
         [TestMethod()]
-        public void containsTreeTest()
+        public void ContainsTreeTest()
         {
             BinarySearchTree t1 = new BinarySearchTree(); // TODO: Initialize to an appropriate value
             BinarySearchTree t2 = new BinarySearchTree(); // TODO: Initialize to an appropriate value

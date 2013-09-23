@@ -68,7 +68,7 @@ namespace CosoleApplication1_Test
         /// <summary>
         ///A test for commonAncerstorProved
         ///</summary>
-        public void commonAncerstorProvedTestHelper<T>()
+        public void CommonAncerstorProvedTestHelper<T>()
         {
             BinaryTree<int> target = new BinaryTree<int>(); // TODO: Initialize to an appropriate value
             
@@ -106,9 +106,9 @@ namespace CosoleApplication1_Test
         }
 
         [TestMethod()]
-        public void commonAncerstorProvedTest()
+        public void CommonAncerstorProvedTest()
         {
-            commonAncerstorProvedTestHelper<GenericParameterHelper>();
+            CommonAncerstorProvedTestHelper<GenericParameterHelper>();
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace CosoleApplication1_Test
         /// <summary>
         ///A test for checkBST
         ///</summary>
-        public void checkBSTTestHelper<T>()
+        public void CheckBSTTestHelper<T>()
         {
 
             int[] data = { 20, 30, 10, 25 };
@@ -166,9 +166,9 @@ namespace CosoleApplication1_Test
         }
 
         [TestMethod()]
-        public void checkBSTTest()
+        public void CheckBSTTest()
         {
-            checkBSTTestHelper<GenericParameterHelper>();
+            CheckBSTTestHelper<GenericParameterHelper>();
         }
 
         #region private function
