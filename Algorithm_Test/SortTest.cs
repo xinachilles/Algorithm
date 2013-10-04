@@ -127,5 +127,19 @@ namespace CosoleApplication1_Test
 
 
 
+
+        /// <summary>
+        ///A test for BubbleSort
+        ///</summary>
+        [TestMethod()]
+        public void BubbleSortTest()
+        {
+            Sort target = new Sort(); // TODO: Initialize to an appropriate value
+            int[] array ={5,2,8,7,21,10} ; // TODO: Initialize to an appropriate value
+            int[] arrayExpected = {2,5,7,8,10,21 }; // TODO: Initialize to an appropriate value
+            target.BubbleSort(ref array);
+           CollectionAssert.AreEqual(arrayExpected, array);
+            
+        }
     }
 }

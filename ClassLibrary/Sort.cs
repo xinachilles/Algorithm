@@ -46,9 +46,7 @@ namespace ConsoleApplication1
 
                     if (array[j] < array[i])
                     {
-                        int temp = array[j];
-                        array[j] = array[i];
-                        array[i] = temp;
+                        MySwitch(ref array, j, i);
                     }
 
             }

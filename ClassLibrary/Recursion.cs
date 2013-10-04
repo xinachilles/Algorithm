@@ -656,16 +656,16 @@ namespace ClassLibrary
                     {
                         c += f(exp, false, s, i - 1) * f(exp, true, i + 1, e);
                         c += f(exp, true, s, i - 1) * f(exp, false, i + 1, e);
-                        c += f(exp, false, s, i - 1) * f(exp, false, i + l, e);
+                        c += f(exp, false, s, i - 1) * f(exp, false, i + 1, e);
                     }
                     else if (op == '|')
                     {
-                        c += f(exp, false, s, i - 1) * f(exp, false, i + l, e);
+                        c += f(exp, false, s, i - 1) * f(exp, false, i + 1, e);
                     }
                     else if (op == '^')
                     {
                         c += f(exp, true, s, i - 1) * f(exp, true, i + 1, e);
-                        c += f(exp, false, s, i - 1) * f(exp, false, i + l, e);
+                        c += f(exp, false, s, i - 1) * f(exp, false, i + 1, e);
                     }
                 }
             }
