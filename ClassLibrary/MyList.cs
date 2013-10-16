@@ -17,18 +17,250 @@ namespace ConsoleApplication1
     class MyList
     {
 
-        private MyNode head;
-
-        private class Result
+        public MyNode head;
+        public int this[int index]
         {
-            public MyNode node;
-            public bool result = false;
-            public Result(MyNode n, bool b)
+            get
             {
-                node = n;
-                result = b;
+                int[] arrResult = TravelList();
+                return arrResult[index];
+
+
+            }
+            set
+            {
+                MyNode temp = head;
+                int i = 0;
+                while (temp.next != null)
+                {
+                    if (i == index)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        temp = temp.next;
+                        i++;
+
+                    }
+                    if (i == index)
+                    {
+                        temp.data = value;
+                    }
+                }
+
+            }
+
+        }
+        #region 2.2
+
+        //Implement an algorithm to find the kth to last element of a singly linked list.
+        public int FindKth(int k)
+        {
+            MyNode node = head;
+            int value = 0;
+            FindKthNode(node, k, ref value);
+            return value;
+
+        }
+        private int FindKthNode(MyNode head, int k, ref int value)
+        {
+
+            if (head == null)
+            {
+                return 0;
+            }
+
+            int n = FindKthNode(head.next, k, ref value) + 1;
+
+            if (n == k)
+            {
+                value = head.data;
+            }
+
+            return n;
+
+        }
+
+        public MyNode FindKthNodeWithoutRecursive(int k)
+        {
+            MyNode fast = head;
+            MyNode slow = head;
+
+            for (int i = 0; i < k - 1; i++)
+            {
+                if (fast == null) return fast;
+                fast = fast.next;
+            }
+
+            if (fast == null) return null;
+
+            while (fast.next != null)
+            {
+
+                slow = slow.next;
+                fast = fast.next;
+            }
+
+            return slow;
+
+        }
+        #endregion
+        #region 2.4
+        //Write code to partition a linked list around a value x, such that all nodes less than x
+        //come before all nodes greater than or equal to x.
+        public MyNode Partition(int x)
+        {
+            MyNode beforeStart = null;
+            MyNode beforeEnd = null;
+            MyNode afterStart = null;
+            MyNode afterEnd = null;
+            MyNode node = head;
+
+            while (node != null)
+            {
+
+
+                if (node.data <= x)
+                {
+
+                    if (beforeStart == null)
+                    {
+
+                        beforeStart = node;
+                        beforeEnd = beforeStart;
+                    }
+                    else
+                    {
+                        beforeEnd.next = node;
+                        beforeEnd = node;
+
+                    }
+
+                }
+
+                else
+                {
+                    if (afterStart == null)
+                    {
+                        afterStart = node;
+                        afterEnd = afterStart;
+                    }
+                    else
+                    {
+                        afterEnd.next = node;
+                        afterEnd = node;
+
+                    }
+
+                }
+
+                node = node.next;
+
+            }
+
+            if (beforeStart != null)
+            {
+                beforeEnd.next = afterStart;
+                afterEnd.next = null;
+                return beforeStart;
+            }
+            else
+            {
+                afterEnd.next = null;
+                return afterStart;
+
             }
         }
+        // only use two variable
+        public MyNode Partition2(int x)
+        {
+
+            MyNode node = head;
+            MyNode beforeStart = null;
+            MyNode afterStart = null;
+
+            /* Partition list */
+            while (node != null)
+            {
+                MyNode next = node.next;
+                if (node.data < x)
+                {
+                    /* Insert node into start of before list */
+                    node.next = beforeStart;
+                    beforeStart = node;
+                }
+                else
+                {
+                    /* Insert node into front of after list */
+                    node.next = afterStart;
+                    afterStart = node;
+                }
+                node = next;
+            }
+
+            /* Merge before list and after list */
+            if (beforeStart == null)
+            {
+                return afterStart;
+            }
+
+            /* Find end of before list, and merge the lists */
+            MyNode before_head = beforeStart;
+            while (beforeStart.next != null)
+            {
+                beforeStart = beforeStart.next;
+            }
+            beforeStart.next = afterStart;
+
+            return before_head;
+        }
+
+
+        #endregion
+        #region 2.5
+        //You have two numbers represented by a linked list, where each node contains a
+        //single digit. The digits are stored in reverse order, such that the 1 's digit is at the head
+        //of the list. Write a function that adds the two numbers and returns the sum as a
+        //linked list.
+
+        public MyNode AddLists(MyNode l1, MyNode l2, int carry)
+        {
+            /* We're done if both lists are null AND the carry value is 0 */
+            if (l1 == null && l2 == null && carry == 0)
+            {
+                return null;
+            }
+
+            MyNode result = new MyNode();
+
+            /* Add value, and the data from 11 and 12 */
+            int value = carry;
+            if (l1 != null)
+            {
+                value += l1.data;
+            }
+            if (l2 != null)
+            {
+                value += l2.data;
+            }
+
+            result.data = value % 10; /* Second digit of number */
+
+            /* Recurse */
+            if (l1 != null || l1 != null)
+            {
+                MyNode more = AddLists(l1 == null ? null : l1.next,
+                l1 == null ? null : l1.next,
+                value >= 10 ? 1 : 0);
+                // result.setNext(more);
+            }
+            return result;
+        }
+
+        #endregion 2.5
+
+       
 
 
         public MyList(int[] n)
@@ -139,10 +371,47 @@ namespace ConsoleApplication1
 
         }
 
+
+        public void DeleteList(MyNode node)
+        {
+            MyNode temp = head;
+            MyNode perious = head;
+            // if the node in the head
+            if (node == head)
+            {
+                head = head.next;
+                return;
+            }
+            // if the node in the middle
+            while (temp.next != null)
+            {
+                if (temp == node)
+                {
+                    perious.next = temp.next;
+                    return;
+                }
+                else
+                {
+
+                    perious = temp;
+                    temp = temp.next;
+                }
+            }
+            // if the node in the tail 
+            if (perious != null && perious.next == node)
+            {
+                perious.next = null;
+            }
+
+
+
+
+        }
+
         //implement an algorithm to delete a node in the middle of a singly linked list, given
         // only access to that node.
         // if the list only have one node
-        private void DeleteList(ref MyNode node)
+        public void DeleteList(ref MyNode node)
         {
 
             if (node != null && node.next != null)
@@ -164,7 +433,7 @@ namespace ConsoleApplication1
             if (node != null && node.next == null)
             {
 
-                head = null;
+                node = null;
 
             }
 
@@ -221,164 +490,10 @@ namespace ConsoleApplication1
 
         }
 
-        //Implement an algorithm to find the kth to last element of a singly linked list.
-        public int FindKth(int k)
-        {
-            MyNode node = head;
-            int value = 0;
-            FindKthNode(node, k, ref value);
-            return value;
+        
+        
 
-        }
-        private int FindKthNode(MyNode head, int k, ref int value)
-        {
-
-            if (head == null)
-            {
-                return 0;
-            }
-
-            int n = FindKthNode(head.next, k, ref value) + 1;
-
-            if (n == k)
-            {
-                value = head.data;
-            }
-
-            return n;
-
-        }
-
-        public MyNode FindKthNodeWithoutRecursive(int k)
-        {
-            MyNode fast = head;
-            MyNode slow = head;
-
-            for (int i = 0; i < k; i++)
-            {
-                if (fast == null) return fast;
-                fast = fast.next;
-            }
-
-            if (fast == null) return null;
-
-            while (fast != null)
-            {
-
-                slow = slow.next;
-                fast = fast.next;
-            }
-
-            return slow;
-
-        }
-
-        //Write code to partition a linked list around a value x, such that all nodes less than x
-        //come before all nodes greater than or equal to x.
-        public MyNode Partition(int x)
-        {
-            MyNode beforeStart = null;
-            MyNode beforeEnd = null;
-            MyNode afterStart = null;
-            MyNode afterEnd = null;
-            MyNode node = head;
-
-            while (node != null)
-            {
-
-
-                if (node.data <= x)
-                {
-
-                    if (beforeStart == null)
-                    {
-
-                        beforeStart = node;
-                        beforeEnd = beforeStart;
-                    }
-                    else
-                    {
-                        beforeEnd.next = node;
-                        beforeEnd = node;
-
-                    }
-
-                }
-
-                else
-                {
-                    if (afterStart == null)
-                    {
-                        afterStart = node;
-                        afterEnd = afterStart;
-                    }
-                    else
-                    {
-                        afterEnd.next = node;
-                        afterEnd = node;
-
-                    }
-
-                }
-
-                node = node.next;
-
-            }
-
-            if (beforeStart != null)
-            {
-                beforeEnd.next = afterStart;
-                afterEnd.next = null;
-                return beforeStart;
-            }
-            else
-            {
-                afterEnd.next = null;
-                return afterStart;
-
-            }
-        }
-
-
-        //You have two numbers represented by a linked list, where each node contains a
-        //single digit. The digits are stored in reverse order, such that the 1 's digit is at the head
-        //of the list. Write a function that adds the two numbers and returns the sum as a
-        //linked list.
-
-        //public MyNode AddLists(MyNode l1, MyNode l2, int carry)
-        //{
-        //    /* We're done if both lists are null AND the carry value is 0 */
-        //    if (l1 == null && l2 == null && carry == 0)
-        //    {
-        //        return null;
-        //    }
-
-        //    MyNode result = new LinkedListNode(carry, null, null);
-
-        //    /* Add value, and the data from 11 and 12 */
-        //    int value = carry;
-        //    if (l1 != null)
-        //    {
-        //        value += l1.data;
-        //    }
-        //    if (l2 != null)
-        //    {
-        //        value += l2.data;
-        //    }
-
-        //    result.data = value % 10; /* Second digit of number */
-
-        //    /* Recurse */
-        //    if (l1 != null || l1 != null)
-        //    {
-        //        LinkedListNode more = AddLists(l1 == null ? null : l1.next,
-        //        l1 == null ? null : l1.next,
-        //        value >= 10 ? 1 : 0);
-        //        result.setNext(more);
-        //    }
-        //    return result;
-        //}
-
+      
 
 
         public MyNode FindBeginning()
@@ -418,76 +533,8 @@ namespace ConsoleApplication1
             return fast;
         }
 
-        public bool IsPalindrome(MyNode head)
-        {
-            MyNode fast = head;
-            MyNode slow = head;
-
-            Stack<int> stack = new Stack<int>();
-
-            /* Push elements from first half of linked list onto stack. When
-             * fast runner (which is moving at 2x speed) reaches the end of
-             * the linked list, then we know we're at the middle */
-            while (fast != null && fast.next != null)
-            {
-                stack.Push(slow.data);
-                slow = slow.next;
-                fast = fast.next.next;
-            }
-
-            /* Has odd number of elements, so skip the middle element */
-            if (fast != null)
-            {
-                slow = slow.next;
-            }
-
-            while (slow != null)
-            {
-                int top = stack.Pop();
-
-                /* If values are different, then it's not a palindrome */
-                if (top != slow.data)
-                {
-                    return false;
-                }
-                slow = slow.next;
-            }
-            return true;
-        }
+       
 
 
-       private Result IsPalindromeRecurse(MyNode head, int length)
-        {
-            if (head == null || length == 8)
-            {
-                return new Result(null, true);
-            }
-            else if (length == 1)
-            {
-                return new Result(head.next, true);
-            }
-            else if (length == 2)
-            {
-                return new Result(head.next.next,
-                 head.data == head.next.data);
-            }
-            Result res = IsPalindromeRecurse(head.next, length - 2);
-            if (!res.result || res.node == null)
-            {
-                return res;
-            }
-            else
-            {
-                res.result = head.data == res.node.data;
-                res.node = res.node.next;
-                return res;
-            }
-        }
-
-       public  bool isPalindromeWithRecurse(int length)
-        {
-            Result p = IsPalindromeRecurse(head, length);
-            return p.result;
-        }
-    }
+       }
 }

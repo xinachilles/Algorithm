@@ -94,23 +94,7 @@ namespace CosoleApplication1_Test
            CollectionAssert.AreEqual(except, target.TravelList());
         }
 
-        /// <summary>
-        ///A test for DeleteList
-        ///</summary>
-        [TestMethod()]
-        [DeploymentItem("ClassLibrary.dll")]
-        public void DeleteListTest()
-        {
-            //PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            int[] s = { 1};
-            int[] expected = {};
-            MyList_Accessor target = new MyList_Accessor(s); // TODO: Initialize to an appropriate value
-            MyNode_Accessor node = target.head; // TODO: Initialize to an appropriate value
-            //MyNode_Accessor nodeExpected = null; // TODO: Initialize to an appropriate value
-            target.DeleteList(ref node);
-            CollectionAssert.AreEqual(expected, target.TravelList());
-        }
-
+     
         /// <summary>
         ///A test for RemoveDuplicate
         ///</summary>
@@ -203,6 +187,50 @@ namespace CosoleApplication1_Test
             actual = target.isPalindromeWithRecurse(length);
             Assert.AreEqual(expected, actual);
           
+        }
+
+        /// <summary>
+        ///A test for Item
+        ///</summary>
+        [TestMethod()]
+        public void ItemTest()
+        {
+            int[] n = {0,1,2,3,4,5,6,7,8,9}; // TODO: Initialize to an appropriate value
+            MyList target = new MyList(n); // TODO: Initialize to an appropriate value
+            int index = 3; // TODO: Initialize to an appropriate value
+            int expected = 9; // TODO: Initialize to an appropriate value
+            int actual;
+           target[index] = expected;
+           actual = target[index];
+            Assert.AreEqual(expected, actual);
+                    }
+
+        /// <summary>
+        ///A test for DeleteList
+        ///</summary>
+        [TestMethod()]
+        public void DeleteListTest()
+        {
+            int[] n = {0,1,2,3,4,5,6}; // TODO: Initialize to an appropriate value
+            MyList target = new MyList(n); // TODO: Initialize to an appropriate value
+            MyNode node = null; // TODO: Initialize to an appropriate value
+            MyNode nodeExpected = null; // TODO: Initialize to an appropriate value
+            target.DeleteList(ref target.head.next.next);
+            Assert.AreEqual(nodeExpected, node);
+            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+        }
+
+        /// <summary>
+        ///A test for DeleteList
+        ///</summary>
+        [TestMethod()]
+        public void DeleteListTest1()
+        {
+            int[] n = {1,2,3}; // TODO: Initialize to an appropriate value
+            MyList target = new MyList(n); // TODO: Initialize to an appropriate value
+            MyNode node = target.head.next.next; // TODO: Initialize to an appropriate value
+            target.DeleteList(node);
+           
         }
     }
 }
