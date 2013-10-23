@@ -168,7 +168,7 @@ namespace ConsoleApplication1
 
             System.Console.WriteLine(s1);
 
-            s1 = "Hello ";
+            s1 = "Hello";
             s2 = s1;
             s1 += "World";
 
@@ -213,31 +213,7 @@ namespace ConsoleApplication1
 
         }
 
-        //      public static void permutation2(String str1, String str2){  
-        //  if (str1.Length != str2.Length)
-        //  {  
-        //      Console.WriteLine("Not permutation of the other.");  
-        //      return; 
-        //  }  
-
-        //   int[] check = new int[256]; // assumption if Unicode with a large array  
-        //   char[] temp = str1.ToArray();  
-        //   for (int i = 0;i<str1.Length;i++) // count number of each char in temp
-        //   {
-        //     check[c-'a']++; // careful with ArrayOutBound  
-        //   }
-
-
-        //   for (int i=0; i< str2.Length; i++){  
-        //     int m = (int)str2[i];  
-        //     if (--temp[m-'a'] < 0){  
-        //      Console.WriteLine("Not permutation of the other.");  
-        //       return;  
-        //     }  
-        //   }  
-        //   Console.WriteLine("Yes permutation of the other.");  
-        //}  
-
+        
         public static void repSpa(ref string s)
         {
             char[] n = s.ToArray();

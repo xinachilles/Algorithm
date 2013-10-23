@@ -11,6 +11,12 @@ namespace ConsoleApplication1
     {
         public int data;
         public MyNode next;
+        public MyNode() { }
+        public MyNode(int value)
+        {
+            data = value;
+        }
+
 
     }
 
@@ -52,6 +58,62 @@ namespace ConsoleApplication1
             }
 
         }
+        #region 2.1
+        //Write code to remove duplicates from an unsorted linked list.
+        //FOLLOW UP
+        //How would you solve this problem if a temporary buffer is not allowed?
+        public void RemoveDuplicate()
+        {
+            Hashtable table = new Hashtable();
+            MyNode previous = null;
+            if (head != null)
+            {
+                MyNode node = head;
+                while (node != null)
+                {
+                    if (table.Contains(node.data))
+                    {
+                        previous.next = node.next;
+                    }
+                    else
+                    {
+                        table.Add(node.data, true);
+                        previous = node;
+                    }
+                    node = node.next;
+                }
+            }
+        }
+
+        public void RemoveDuplicateWithoutBuffer()
+        {
+
+            MyNode current = head;
+
+            while (current != null)
+            {
+                MyNode runner = current;
+                while (runner.next != null)
+                {
+                    if (runner.data == current.next.data)
+                    {
+                        runner.next = runner.next.next;
+                    }
+                    else
+                    {
+
+                        runner = runner.next;
+                    }
+                }
+
+                current = current.next;
+            }
+
+        }
+
+
+
+        #endregion
         #region 2.2
 
         //Implement an algorithm to find the kth to last element of a singly linked list.
@@ -258,10 +320,261 @@ namespace ConsoleApplication1
             return result;
         }
 
+
+
+        public class PartialSum
+        {
+            public MyNode sum = null;
+            public int carry = 0;
+        }
+
+        MyNode addLists(MyNode l1, MyNode l2)
+        {
+            int len1 = length(l1);
+            int len2 = length(l2);
+
+            /* Pad the shorter list with zeros - see note (1) */
+            if (len1 < len2)
+            {
+                l1 = padList(l1, len2 - len1);
+            }
+            else
+            {
+                l2 = padList(l2, len1 - len2);
+            }
+
+            /* Add lists */
+            PartialSum sum = AddListsHelper(l1, l2);
+
+            /* If there was a carry value left over, insert this at the
+           21 * front of the list. Otherwise, just return the linked list. */
+            if (sum.carry == 0)
+            {
+                return sum.sum;
+            }
+            else
+            {
+                MyNode result = InsertBefore(sum.sum, sum.carry);
+                return result;
+            }
+        }
+
+        PartialSum AddListsHelper(MyNode l1, MyNode l2)
+        {
+            if (l1 == null && l2 == null)
+            {
+                PartialSum sum = new PartialSum();
+                return sum;
+            }
+            /* Add smaller digits recursively */
+            PartialSum s = AddListsHelper(l1.next, l2.next);
+
+            /* Add carry to current data */
+            int val = s.carry + l1.data + l2.data;
+
+            /* Insert sum of current digits */
+            MyNode full_result = InsertBefore(s.sum, val % 10);
+
+            /* Return sum so far, and the carry value */
+            s.sum = full_result;
+            s.carry = val / 10;
+            return s;
+        }
+
+        /* Pad the list with zeros */
+        MyNode padList(MyNode l, int padding)
+        {
+            MyNode head = l;
+            for (int i = 0; i < padding; i++)
+            {
+                MyNode n = new MyNode();
+                n.next = head;
+                head = n;
+            }
+            return head;
+        }
+
+        /* Helper function to insert node in the front of a linked list */
+        MyNode InsertBefore(MyNode list, int data)
+        {
+            MyNode node = new MyNode(data);
+            if (list != null)
+            {
+                node.next = list;
+            }
+            return node;
+        }
+
+
         #endregion 2.5
+        #region 2.3
+        //implement an algorithm to delete a node in the middle of a singly linked list, given
+        // only access to that node.
+        // if the list only have one node
+        // myself 
+        //public void DeleteList(MyNode node)
+        //{
+        //    MyNode temp = head;
+        //    MyNode perious = head;
+        //    // if the node in the head
+        //    if (node == head)
+        //    {
+        //        head = head.next;
+        //        return;
+        //    }
+        //    // if the node in the middle
+        //    while (temp.next != null)
+        //    {
+        //        if (temp == node)
+        //        {
+        //            perious.next = temp.next;
+        //            return;
+        //        }
+        //        else
+        //        {
 
-       
+        //            perious = temp;
+        //            temp = temp.next;
+        //        }
+        //    }
+        //    // if the node in the tail 
+        //    if (perious != null && perious.next == node)
+        //    {
+        //        perious.next = null;
+        //    }
 
+
+
+
+        //}
+
+
+        public bool DeleteNode(MyNode n)
+        {
+            if (n == null || n.next == null)
+            {
+                return false; // Failure
+            }
+            MyNode next = n.next;
+            n.data = next.data;
+            n.next = next.next;
+            return true;
+        }
+
+        //public void DeleteList(ref MyNode node)
+        //{
+
+        //    if (node != null && node.next != null)
+        //    {
+
+        //        MyNode temp = node;
+        //        MyNode perious = null;
+        //        while (temp.next != null)
+        //        {
+        //            temp.data = temp.next.data;
+        //            perious = temp;
+        //            temp = temp.next;
+
+        //        }
+        //        if (perious != null) perious.next = null;
+
+        //    }
+
+        //    if (node != null && node.next == null)
+        //    {
+
+        //        node = null;
+
+        //    }
+
+
+        //}
+
+        #endregion
+        #region 2.7
+        //2.7 Implement a function to check if a linked list is a palindrome
+        public bool IsPalindrome(MyNode head)
+        {
+            MyNode fast = head;
+            MyNode slow = head;
+
+
+            Stack<int> stack = new Stack<int>();
+
+            /* Push elements from first half of linked list onto stack. When
+             * fast runner (which is moving at 2x speed) reaches the end of
+             * the linked list, then we know we're at the middle */
+            while (fast != null && fast.next != null)
+            {
+                stack.Push(slow.data);
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+
+            /* Has odd number of elements, so skip the middle element */
+            if (fast != null)
+            {
+                slow = slow.next;
+            }
+
+            while (slow != null)
+            {
+                int top = stack.Pop();
+
+                /* If values are different, then it's not a palindrome */
+                if (top != slow.data)
+                {
+                    return false;
+                }
+                slow = slow.next;
+            }
+            return true;
+        }
+        private class Result
+        {
+            public MyNode node;
+            public bool result;
+            public Result(MyNode n, bool r)
+            {
+                result = r;
+                node = n;
+            }
+        }
+        private Result IsPalindromeRecurse(MyNode head, int length)
+        {
+
+            if (head == null || length == 0)
+            {
+                return new Result(null, true);
+            }
+            else if (length == 1)
+            {
+                return new Result(head.next, true);
+            }
+            else if (length == 2)
+            {
+                return new Result(head.next.next,
+                 head.data == head.next.data);
+            }
+            Result res = IsPalindromeRecurse(head.next, length - 2);
+            if (!res.result || res.node == null)
+            {
+                return res;
+            }
+            else
+            {
+                res.result = (head.data == res.node.data);
+                res.node = res.node.next;
+                return res;
+            }
+        }
+
+        public bool IsPalindromeWithRecurse(int length)
+        {
+            Result p = IsPalindromeRecurse(head, length);
+            return p.result;
+        }
+        #endregion
 
         public MyList(int[] n)
         {
@@ -372,128 +685,6 @@ namespace ConsoleApplication1
         }
 
 
-        public void DeleteList(MyNode node)
-        {
-            MyNode temp = head;
-            MyNode perious = head;
-            // if the node in the head
-            if (node == head)
-            {
-                head = head.next;
-                return;
-            }
-            // if the node in the middle
-            while (temp.next != null)
-            {
-                if (temp == node)
-                {
-                    perious.next = temp.next;
-                    return;
-                }
-                else
-                {
-
-                    perious = temp;
-                    temp = temp.next;
-                }
-            }
-            // if the node in the tail 
-            if (perious != null && perious.next == node)
-            {
-                perious.next = null;
-            }
-
-
-
-
-        }
-
-        //implement an algorithm to delete a node in the middle of a singly linked list, given
-        // only access to that node.
-        // if the list only have one node
-        public void DeleteList(ref MyNode node)
-        {
-
-            if (node != null && node.next != null)
-            {
-
-                MyNode temp = node;
-                MyNode perious = null;
-                while (temp.next != null)
-                {
-                    temp.data = temp.next.data;
-                    perious = temp;
-                    temp = temp.next;
-
-                }
-                if (perious != null) perious.next = null;
-
-            }
-
-            if (node != null && node.next == null)
-            {
-
-                node = null;
-
-            }
-
-
-        }
-
-
-        public void RemoveDuplicate()
-        {
-            Hashtable table = new Hashtable();
-            MyNode previous = null;
-            if (head != null)
-            {
-                MyNode node = head;
-                while (node != null)
-                {
-                    if (table.Contains(node.data))
-                    {
-                        previous.next = node.next;
-                    }
-                    else
-                    {
-                        table.Add(node.data, true);
-                        previous = node;
-                    }
-                    node = node.next;
-                }
-            }
-        }
-
-        public void RemoveDuplicateWithoutBuffer()
-        {
-
-            MyNode current = head;
-
-            while (current != null)
-            {
-                MyNode runner = current;
-                while (runner.next != null)
-                {
-                    if (runner.data == current.next.data)
-                    {
-                        runner.next = runner.next.next;
-                    }
-                    else
-                    {
-
-                        runner = runner.next;
-                    }
-                }
-
-                current = current.next;
-            }
-
-        }
-
-        
-        
-
-      
 
 
         public MyNode FindBeginning()
@@ -533,8 +724,17 @@ namespace ConsoleApplication1
             return fast;
         }
 
-       
+        public int length(MyNode node)
+        {
+            int i = 0;
+            while (node != null)
+            {
+                node = node.next;
+                i = i++;
+            }
+            return i;
+        }
 
 
-       }
+    }
 }

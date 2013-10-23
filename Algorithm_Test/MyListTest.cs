@@ -179,12 +179,12 @@ namespace CosoleApplication1_Test
         [TestMethod()]
         public void IsPalindromeWithRecurseTest()
         {
-            int[] n = {0,1, 2, 3, 2, 1, 1}; // TODO: Initialize to an appropriate value
+            int[] n = {2,1,1,2}; // TODO: Initialize to an appropriate value
             MyList target = new MyList(n); // TODO: Initialize to an appropriate value
             int length = n.Length; // TODO: Initialize to an appropriate value
             bool expected = false; // TODO: Initialize to an appropriate value
             bool actual;
-            actual = target.isPalindromeWithRecurse(length);
+            actual = target.IsPalindromeWithRecurse(length);
             Assert.AreEqual(expected, actual);
           
         }
@@ -205,32 +205,39 @@ namespace CosoleApplication1_Test
             Assert.AreEqual(expected, actual);
                     }
 
+
+
         /// <summary>
-        ///A test for DeleteList
+        ///A test for IsPalindrome
         ///</summary>
         [TestMethod()]
-        public void DeleteListTest()
+        public void IsPalindromeTest()
         {
-            int[] n = {0,1,2,3,4,5,6}; // TODO: Initialize to an appropriate value
+            int[] n = {1}; // TODO: Initialize to an appropriate value
             MyList target = new MyList(n); // TODO: Initialize to an appropriate value
-            MyNode node = null; // TODO: Initialize to an appropriate value
-            MyNode nodeExpected = null; // TODO: Initialize to an appropriate value
-            target.DeleteList(ref target.head.next.next);
-            Assert.AreEqual(nodeExpected, node);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+            MyNode head = target.head; // TODO: Initialize to an appropriate value
+            bool expected = false; // TODO: Initialize to an appropriate value
+            bool actual;
+            actual = target.IsPalindrome(head);
+            Assert.AreEqual(expected, actual);
+            
         }
 
         /// <summary>
-        ///A test for DeleteList
+        ///A test for DeleteNode
         ///</summary>
         [TestMethod()]
-        public void DeleteListTest1()
+        public void DeleteNodeTest()
         {
-            int[] n = {1,2,3}; // TODO: Initialize to an appropriate value
+            int[] n = {1,2,3,4,5,6}; // TODO: Initialize to an appropriate value
             MyList target = new MyList(n); // TODO: Initialize to an appropriate value
-            MyNode node = target.head.next.next; // TODO: Initialize to an appropriate value
-            target.DeleteList(node);
-           
+            MyNode n1 = target.head.next.next; // TODO: Initialize to an appropriate value
+            MyNode nExpected = null; // TODO: Initialize to an appropriate value
+            bool expected = false; // TODO: Initialize to an appropriate value
+            bool actual;
+            actual = target.DeleteNode( n1);
+          
+            
         }
     }
 }
