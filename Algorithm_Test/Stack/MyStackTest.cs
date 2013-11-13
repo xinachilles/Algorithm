@@ -71,13 +71,14 @@ namespace CosoleApplication1_Test
         [TestMethod()]
         public void PushTest()
         {
-            int capacity = 3; // TODO: Initialize to an appropriate value
+            int capacity = 2; // TODO: Initialize to an appropriate value
             MyStack<int> target = new MyStack<int>(capacity); // TODO: Initialize to an appropriate value
             target.Push(1);
             target.Push(2);
             target.Push(3);
             target.Push(4);
             target.Push(5);
+            target.Push(6);
             //Assert.AreEqual(expected, actual);
             //Assert.Inconclusive("Verify the correctness of this test method.");
         }

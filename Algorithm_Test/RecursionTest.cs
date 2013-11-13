@@ -114,7 +114,6 @@ namespace CosoleApplication1_Test
             int x = 10; // TODO: Initialize to an appropriate value
             int y = 10; // TODO: Initialize to an appropriate value
             ArrayList path = new ArrayList() ; // TODO: Initialize to an appropriate value
-            bool expected = false; // TODO: Initialize to an appropriate value
             bool actual;
             actual = target.getPath(x, y, path);
            

@@ -16,10 +16,11 @@ namespace ClassLibrary.Stack
             value = n;
         }
     }
-    public class MyStack<T> : Stack<T>
+    // Describe how you could use a single array to implement three stacks
+    public class MyStack<T> 
     {
 
-        // Describe how you could use a single array to implement three stacks
+       
         static int stackSize = 100;
         T[] buffer = new T[stackSize * 3];
         int[] stackPointer = { -1, -1, -1 }; // pointers to track top element
@@ -70,7 +71,7 @@ namespace ClassLibrary.Stack
 
 
         public MyStack(int capacity) { this.capacity = capacity; }
-        public MyStack() { }
+       
 
 
         public void Join(Node<T> above, Node<T> below)
@@ -79,9 +80,10 @@ namespace ClassLibrary.Stack
             if (above != null) above.below = below;
         }
 
-       new public bool Push(T v)
+      public bool Push(T v)
         {
-            if (size >= capacity) return false;
+            if (size >= capacity)
+                return false;
             size++;
             Node<T> n = new Node<T>(v);
             if (size == 1) bottom = n;
@@ -90,7 +92,7 @@ namespace ClassLibrary.Stack
             return true;
         }
 
-        new public T Pop()
+        public T Pop()
         {
             Node<T> t = top;
             top = top.below;
@@ -103,6 +105,12 @@ namespace ClassLibrary.Stack
             return size == 0;
         }
 
+        public bool IsFull()
+        {
+            if (size >= capacity) { return true; }
+            else { return false; }
+        }
+
         public T RemoveBottom()
         {
             Node<T> b = bottom;
@@ -113,7 +121,7 @@ namespace ClassLibrary.Stack
 
         }
 
-        public bool IsFull() { return capacity == size; }
+        
 
         //Write a program to sort a stack in ascending order (with biggest items on top).
         //You may use at most one additional stack to hold items, but you may not copy the

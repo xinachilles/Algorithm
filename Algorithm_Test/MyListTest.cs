@@ -232,12 +232,29 @@ namespace CosoleApplication1_Test
             int[] n = {1,2,3,4,5,6}; // TODO: Initialize to an appropriate value
             MyList target = new MyList(n); // TODO: Initialize to an appropriate value
             MyNode n1 = target.head.next.next; // TODO: Initialize to an appropriate value
-            MyNode nExpected = null; // TODO: Initialize to an appropriate value
-            bool expected = false; // TODO: Initialize to an appropriate value
             bool actual;
             actual = target.DeleteNode( n1);
           
             
+        }
+
+        /// <summary>
+        ///A test for AddLists
+        ///</summary>
+        [TestMethod()]
+        public void AddListsTest()
+        {
+            
+            MyList target1 = new MyList(new int[]{1,2,3,4}); // TODO: Initialize to an appropriate value
+            MyList target2 = new MyList(new int[] { 5, 6, 7 });
+            MyList target = new MyList();
+            MyNode l1 = target1.head; // TODO: Initialize to an appropriate value
+            MyNode l2 = target2.head; // TODO: Initialize to an appropriate value
+            MyNode expected = null; // TODO: Initialize to an appropriate value
+            MyNode actual;
+            actual = target.AddLists(l1, l2);
+            Assert.AreEqual(expected, actual);
+            Assert.Inconclusive("Verify the correctness of this test method.");
         }
     }
 }

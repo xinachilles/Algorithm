@@ -7,11 +7,11 @@ namespace CosoleApplication1_Test
     
     
     /// <summary>
-    ///This is a test class for StackTwoTest and is intended
-    ///to contain all StackTwoTest Unit Tests
+    ///This is a test class for SetOfStacksTest and is intended
+    ///to contain all SetOfStacksTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class StackTwoTest
+    public class SetOfStacksTest
     {
 
 
@@ -65,62 +65,25 @@ namespace CosoleApplication1_Test
 
 
         /// <summary>
-        ///A test for Push
+        ///A test for PopAt
         ///</summary>
-        [TestMethod()]
-        [ExpectedException(typeof(Exception), "Out of space.")]
-        public void PushTestOutofNumber()
+        public void PopAtTestHelper<T>()
         {
-            try
-            {
-                StackTwo s = new StackTwo();
-                s.Push(0, 1);
-                s.Push(0, 2);
-                s.Push(0, 3);
-                s.Push(0, 4);
-                
-            }
-            catch (Exception e)
-            {
-
-                Assert.AreEqual("Out of space.", e.Message);
-            }
-                                  
+            SetOfStacks<int> target = new SetOfStacks<int>(2) ; // TODO: Initialize to an appropriate value
+            target.Push(1);
+            target.Push(2);
+            target.Push(3);
+            target.Push(4);
+            target.Push(5);
+            target.Push(6);
+            int actual = target.PopAt(1);
+           ;
         }
 
-           /// <summary>
-        ///A test for Peek
-        ///</summary>
         [TestMethod()]
-        public void PeekTest()
+        public void PopAtTest()
         {
-            StackTwo s = new StackTwo();
-            int expected = 5; // TODO: Initialize to an appropriate value
-            int actual;
-            s.Push(0, expected);
-            actual = s.Peek(0);
-            Assert.AreEqual(expected, actual);
-            
-        }
-
-        /// <summary>
-        ///A test for EmptyStack
-        ///</summary>
-        [TestMethod()]
-        public void EmptyStackTest()
-        {
-            bool expected = true;
-            StackTwo s = new StackTwo();
-                       
-            for (int i = 0; i < s.NumberOfElements(); i++)
-            {
-                bool actual = s.IsEmpty(i);
-                Assert.AreEqual(expected, actual);
-            }
-           
-           
-            
-           
+            PopAtTestHelper<GenericParameterHelper>();
         }
     }
 }

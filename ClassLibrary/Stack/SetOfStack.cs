@@ -4,35 +4,64 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 
+#region 3.3
+//Imagine a (literal) stack of plates. If the stack gets too high, it migh t topple. Therefore,
+//in real life, we would likely start a new stack when the previous stack exceeds some
+//threshold. Implement a data structure SetOfStacks that mimics this. SetOf-
+//Stacks should be composed of several stacks and should create a new stack once
+//the previous one exceeds capacity. SetOfStacks.push() and SetOfStacks.
+//pop () should behave identically to a single stack (that is, pop () should return the
+//same values as it would if there were just a single stack).
 
+//FOLLOW UP
+//Implement a function popAt(int index) which performs a pop operation on a
+//specific sub-stack.
 namespace ClassLibrary.Stack
 {
+
+
+
     class SetOfStacks<T>
     {
 
         List<MyStack<T>> stacks = new List<MyStack<T>>();
-        public int capacity;
+        private int capacity;
 
 
-        public SetOfStacks(int capacity)
+        public SetOfStacks(int c)
         {
-            this.capacity = capacity;
+            capacity = c;
         }
 
         public void Push(T v)
         {
 
             MyStack<T> last = GetLastStack();
-            if (last != null || !last.IsFull())
+            if (last != null)
             { // add to last stack
-                last.Push(v);
+                if (last.IsFull() != true)
+                {
+                    last.Push(v);
+                }
+                else
+                {
+
+                    MyStack<T> stack = new MyStack<T>(capacity);
+                    stack.Push(v);
+                    stacks.Add(stack);
+
+                }
+
             }
             else
-            { // must create new stack
+            {
                 MyStack<T> stack = new MyStack<T>(capacity);
                 stack.Push(v);
                 stacks.Add(stack);
             }
+
+
+
         }
         public T Pop()
         {
@@ -54,6 +83,12 @@ namespace ClassLibrary.Stack
             return stacks[stacks.Count - 1];
         }
 
+        public T PopAt(int index)
+        {
+            return leftShift(index, true);
+
+        }
+
 
         public T leftShift(int index, bool removeTop)
         {
@@ -66,7 +101,7 @@ namespace ClassLibrary.Stack
             {
                 stacks.RemoveAt(index);
             }
-            else if (stacks.Capacity > index + 1)
+            else if (stacks.Count  > index + 1)
             {
                 T v = leftShift(index + 1, false);
                 stack.Push(v);
@@ -76,3 +111,4 @@ namespace ClassLibrary.Stack
 
     }
 }
+#endregion 3.3

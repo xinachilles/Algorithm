@@ -5,14 +5,14 @@ using System.Text;
 
 namespace ClassLibrary.Stack
 {
-    class StackTower : MyStack<int>
+    class StackTower : Stack<int>
     {
 
         private Stack<int> disks;
         private int index;
         public StackTower(int i)
         {
-            disks = new MyStack<int>();
+            disks = new Stack<int>();
             index = i;
         }
 

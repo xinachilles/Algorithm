@@ -14,7 +14,7 @@ namespace CosoleApplication1_Test
     public class StackTest
     {
 
-
+            
         private TestContext testContextInstance;
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace CosoleApplication1_Test
         [TestMethod()]
         public void PushTest()
         {
-            MyStack<int> target = new MyStack<int>(); // TODO: Initialize to an appropriate value
+            MyStack<int> target = new MyStack<int>(3); // TODO: Initialize to an appropriate value
             int stackNum = 1; // TODO: Initialize to an appropriate value
             int value = 3; // TODO: Initialize to an appropriate value
             target.Push(stackNum, value);

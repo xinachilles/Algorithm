@@ -75,7 +75,7 @@ namespace ClassLibrary.Stack
 
         private  void Shift(int stackNum)
         {
-            StackData stack = stacks[stackNum];
+             StackData stack = stacks[stackNum];
             // increase the capacity 
             if (stack.size >= stack.capacity)
             {

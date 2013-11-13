@@ -22,7 +22,7 @@ namespace ConsoleApplication1
 
     class MyList
     {
-
+        public MyList() { }
         public MyNode head;
         public int this[int index]
         {
@@ -328,7 +328,7 @@ namespace ConsoleApplication1
             public int carry = 0;
         }
 
-        MyNode addLists(MyNode l1, MyNode l2)
+       public MyNode AddLists(MyNode l1, MyNode l2)
         {
             int len1 = length(l1);
             int len2 = length(l2);
@@ -359,12 +359,12 @@ namespace ConsoleApplication1
             }
         }
 
-        PartialSum AddListsHelper(MyNode l1, MyNode l2)
+        private PartialSum AddListsHelper(MyNode l1, MyNode l2)
         {
             if (l1 == null && l2 == null)
             {
                 PartialSum sum = new PartialSum();
-                return sum;
+                return sum; 
             }
             /* Add smaller digits recursively */
             PartialSum s = AddListsHelper(l1.next, l2.next);
@@ -382,7 +382,7 @@ namespace ConsoleApplication1
         }
 
         /* Pad the list with zeros */
-        MyNode padList(MyNode l, int padding)
+       private MyNode padList(MyNode l, int padding)
         {
             MyNode head = l;
             for (int i = 0; i < padding; i++)
@@ -395,7 +395,7 @@ namespace ConsoleApplication1
         }
 
         /* Helper function to insert node in the front of a linked list */
-        MyNode InsertBefore(MyNode list, int data)
+        private MyNode InsertBefore(MyNode list, int data)
         {
             MyNode node = new MyNode(data);
             if (list != null)
@@ -730,7 +730,7 @@ namespace ConsoleApplication1
             while (node != null)
             {
                 node = node.next;
-                i = i++;
+                i = i + 1;
             }
             return i;
         }

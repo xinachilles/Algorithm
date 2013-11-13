@@ -62,13 +62,14 @@
     <Compile Include="MyListTest.cs" />
     <Compile Include="RecursionTest.cs" />
     <Compile Include="SerarchTest.cs" />
+    <Compile Include="Stack\SetOfStacksTest.cs" />
     <Compile Include="SortTest.cs" />
     <Compile Include="Stack\MyStackTest.cs" />
     <Compile Include="MyStringTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stack\StackTest.cs" />
     <Compile Include="Stack\StackTowerTest.cs" />
-    <Compile Include="Stack\StackTwoTest.cs" />
+    <Compile Include="StackTwoTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj">

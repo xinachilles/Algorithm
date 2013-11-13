@@ -8,7 +8,7 @@ namespace ClassLibrary.Stack
     // How would you design a stack which, in addition to push and pop, also has a
     // function min which returns the minimum element? Push, pop and min should all
     // operate in 0(1) time.
-    class StackWithMin : MyStack<NodeWithMin>
+    class StackWithMin : Stack<NodeWithMin>
     {
         public void push(int value)
         {
@@ -18,7 +18,7 @@ namespace ClassLibrary.Stack
 
         public int min()
         {
-            if (this.IsEmpty())
+            if (this.Count == 0)
             {
                 return int.MaxValue; // Error value
             }
