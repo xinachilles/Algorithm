@@ -125,6 +125,22 @@ namespace CosoleApplication1_Test
             
         }
 
-      
+
+
+        /// <summary>
+        ///A test for IsUniqueChars
+        ///</summary>
+        [TestMethod()]
+        public void IsUniqueCharsTest()
+        {
+            string t = string.Empty; // TODO: Initialize to an appropriate value
+            MyString target = new MyString(t); // TODO: Initialize to an appropriate value
+            string str = string.Empty; // TODO: Initialize to an appropriate value
+            bool expected = false; // TODO: Initialize to an appropriate value
+            bool actual;
+            actual = target.IsUniqueChars(str);
+            Assert.AreEqual(expected, actual);
+            Assert.Inconclusive("Verify the correctness of this test method.");
+        }
     }
 }

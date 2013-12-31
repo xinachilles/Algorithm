@@ -45,6 +45,7 @@
     <Compile Include="Bit.cs" />
     <Compile Include="DerivedClass.cs" />
     <Compile Include="Dynamic.cs" />
+    <Compile Include="Graph\Graph.cs" />
     <Compile Include="Recursion.cs" />
     <Compile Include="Serarch.cs" />
     <Compile Include="Tree\BinarySearchTree.cs" />
@@ -65,9 +66,7 @@
     <Compile Include="Stack\StackWithMin.cs" />
     <Compile Include="StringPerm.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Graph\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
