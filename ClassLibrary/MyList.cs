@@ -285,8 +285,8 @@ namespace ConsoleApplication1
         //single digit. The digits are stored in reverse order, such that the 1 's digit is at the head
         //of the list. Write a function that adds the two numbers and returns the sum as a
         //linked list.
-
-        public MyNode AddLists(MyNode l1, MyNode l2, int carry)
+      
+        public LinkedListNode<int> AddLists(LinkedListNode<int> l1, LinkedListNode<int> l2, int carry,LinkedListNode<int> result)
         {
             /* We're done if both lists are null AND the carry value is 0 */
             if (l1 == null && l2 == null && carry == 0)
@@ -294,27 +294,29 @@ namespace ConsoleApplication1
                 return null;
             }
 
-            MyNode result = new MyNode();
-
+        
+           result = new LinkedListNode<int>(0);
+         
+         
             /* Add value, and the data from 11 and 12 */
             int value = carry;
             if (l1 != null)
             {
-                value += l1.data;
+                value += l1.Value;
             }
             if (l2 != null)
             {
-                value += l2.data;
+                value += l2.Value;
             }
 
-            result.data = value % 10; /* Second digit of number */
+            result.Value = value % 10; /* Second digit of number */
 
             /* Recurse */
-            if (l1 != null || l1 != null)
+            if (l1 != null || l2 != null)
             {
-                MyNode more = AddLists(l1 == null ? null : l1.next,
-                l1 == null ? null : l1.next,
-                value >= 10 ? 1 : 0);
+                LinkedListNode<int> more = AddLists(l1 == null ? null : l1.Next,
+                l2 == null ? null : l2.Next,
+                value >= 10 ? 1 : 0,result.Next);
                 // result.setNext(more);
             }
             return result;
